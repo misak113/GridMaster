@@ -10,7 +10,9 @@
     "babelify": "^6.3.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch-jsx": "jsx --watch --es6module -x jsx src/ dist/src/",
+    "watch-js": "watchify dist/src/app.js -o dist/bundle.js -t babelify"
   },
   "author": "Michael Zabka <michael@farfalia.com> (http://zabka.avantcore.cz/)",
   "license": "ISC"
