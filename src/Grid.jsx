@@ -6,7 +6,7 @@ class Grid extends Component {
 
 	constructor() {
 		super();
-		this.base = 100;
+		this.base = 10;
 	}
 
 	render() {
