@@ -6,7 +6,9 @@
   "dependencies": {
     "react": "^0.13.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babelify": "^6.3.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
