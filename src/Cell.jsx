@@ -14,6 +14,7 @@ class Cell extends Component {
 
 	clickCell(ev) {
 		ClickStore.get().dispatchSelectedPoint(this.props.column, this.props.row);
+		ClickStore.get().dispatchClick();
 		this.setState({ selected: !this.state.selected });
 	}
 	

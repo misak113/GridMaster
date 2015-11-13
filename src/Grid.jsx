@@ -2,19 +2,30 @@
 import React from 'react';
 import {Component} from 'react';
 import Cell from './Cell';
+import Alert from './Alert';
 import ClickStore from './ClickStore';
+import MyButton from './MyButton';
 
 class Grid extends Component {
 
-	constructor() {
-		super();
+	constructor(props, context) {
+		super(props, context);
 		this.base = 10;
 		this.state = {
-			selectedPoints: []
+			selectedPoints: [],
+			width: this.props.width
 		};
 	}
 
 	componentWillMount() {
+		ClickStore.get().bindReachCounter(() => this.setState({ buttonIsShown: true }));
+		ClickStore.get().bindWidth((width) => {
+			ClickStore.get().dispatchRerenderIsStarted();
+			this.setState({ width: width });
+			setTimeout(() => {
+				ClickStore.get().dispatchRerenderIsDone();
+			}, 1000);
+		});
 /*		ClickStore.get().bindSelectedPoint((x, y) => {
 			var newSelectedPoints = JSON.parse(JSON.stringify(this.state.selectedPoints));
 			if (true) {
@@ -34,7 +45,7 @@ class Grid extends Component {
 	render() {
 		var cells = [];
 		for (var row = 0;row < this.props.height;row++) {
-			for (var column = 0;column < this.props.width;column++) {
+			for (var column = 0;column < this.state.width;column++) {
 				cells.push(
 					<Cell key={row + 'x' + column}
 						base={this.base}
@@ -43,7 +54,13 @@ class Grid extends Component {
 				);
 			}
 		}
-		return <div className="grid">{cells}</div>;
+		return (
+			<div className="grid">
+				{this.state.buttonIsShown ? <MyButton/> : null}
+				{cells}
+				{/*<Alert/>*/}
+			</div>
+		);
 	}
 }
 export default Grid;
